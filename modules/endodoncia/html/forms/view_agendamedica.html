@@ -1,0 +1,113 @@
+<div class="row">
+    <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="text-right">
+            <button type="button" id="cargaTodos" class="btn btn-default btn-sm btn-group"><i class="fa fa-list fa-right"></i> Cargar toda la agenda</button>
+            <button type="button" id="cargaConfirmados" class="btn btn-default btn-sm btn-group"><i class="fa fa-check fa-right"></i> Cargar confirmados</button>
+            <button type="button" id="consultaAgenda" class="btn btn-default btn-sm btn-group"><i class="fa fa-calendar fa-right"></i> Consultar agenda por fechas</button>
+        </div>
+    </section>
+</div>
+
+<p></p>
+
+<div class="row">
+    <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div id='agendamedica'></div>
+    </section>
+</div>
+
+<div id="modalAgendaMedica" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <form id="formAgendaMedica" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" class="form-control" id="cod_agenda" name="agendamedica[cod_agenda]">
+        <input type="hidden" class="form-control" id="start_evento_agenda" name="agendamedica[start_evento_agenda]">
+        <input type="hidden" class="form-control" id="end_evento_agenda" name="agendamedica[end_evento_agenda]">
+
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                    <h4 class="modal-title white" >Asignacion de Citas</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-info"><strong>Fecha:<span id="cuandoinfo"></span></strong></div>
+
+                    <fieldset class="form-group">
+                        <label for="nom_evento_agenda"></label>
+                        <input class="form-control" id="nom_evento_agenda" name="agendamedica[nom_evento_agenda]" class="form-control" placeholder="Paciente / evento" required>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <textarea id="des_evento_agenda" rows="8" name="agendamedica[des_evento_agenda]" class="form-control" placeholder="Observaciones / Notas" required></textarea>
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <label class="control-label" for="ind_confirmado">
+                                Confirmado ?
+                            </label>
+                            <div class="onoffswitch pull-right">
+                                <input type="checkbox" name="agendamedica[ind_confirmado]" class="onoffswitch-checkbox" id="ind_confirmado">
+                                <label class="onoffswitch-label" for="ind_confirmado"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="enviarAgenda"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    <button type="button" class="btn btn-danger" id="eliminarAgenda" disabled><i class="fa fa-times"></i> Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modalConsultaAgendaMedica" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <form id="formConsultaAgendaMedica" method="post" enctype="multipart/form-data">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                    <h4 class="modal-title white" >Consultar Agenda por fecha</h4>
+                </div>
+                <div class="modal-body">
+
+                    <fieldset class="form-group">
+                        <label class="col-sm-3 control-label" for="fec_ini">
+                            Desde
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="fec_ini" id="fec_ini" required>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label class="col-sm-3 control-label" for="fec_hasta">
+                            Hasta
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="fec_hasta" id="fec_hasta" required>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="consultarAgenda"><i class="fa fa-calendar"></i> Consultar Agenda</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var _service    = '{$_service}';
+    var _metodo     = '{$_metodo}';
+</script>

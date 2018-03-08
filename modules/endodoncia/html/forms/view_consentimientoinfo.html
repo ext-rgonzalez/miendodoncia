@@ -1,0 +1,154 @@
+<section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="pull-right">
+        <button type="button" id="crearConsentimiento" class="btn btn-default btn-sm pull-right"><i class="fa fa-plus fa-right"></i> Crear Nuevo Consentimiento</button>
+    </div>
+</section>
+
+<section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <hr>
+    <table id="tablaConsentimientos" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th width="3%">Paciente</th>
+            <th width="3%">Tratamiento</th>
+            <th width="0.5%">huella</th>
+            <th width="3%">Tipo Concentimiento</th>
+            <th width="3%">Fecha Registro</th>
+            <th width="1%"></th>
+        </tr>
+        </thead>
+    </table>
+</section>
+
+<div id="modalConsentimiento" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <form id="formConsentimiento" method="post" enctype="multipart/form-data">
+
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                    <h4 class="modal-title white" >Consentimiento Informado</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4> Datos Basicos del Consentimiento</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <fieldset class="form-group">
+                                        <label class="col-sm-12 control-label" for="cod_paciente">
+                                            Seleccionar Paciente
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="nom_paciente" name="consentimiento[nom_paciente]" value="" readonly required>
+                                            <input type="hidden" class="form-control" id="cod_paciente" placeholder="Perfil" name="consentimiento[cod_paciente]" value="" readonly>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button" id="seleccionarPaciente"><i class="fa fa-search"></i> Buscar</button>
+                                            </span>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset class="form-group">
+                                        <label class="col-sm-12 control-label" for="codhistoriaClinica">
+                                            tratamiento
+                                        </label>
+
+                                        <select class="form-control" id="codhistoriaClinica" name="consentimiento[cod_historia_clinica]" style="width: 100%;" required></select>
+                                    </fieldset>
+
+                                    <fieldset class="form-group">
+                                        <label class="col-sm-12 control-label" for="codconsentimiento">
+                                            Tipo de Consentimiento
+                                        </label>
+
+                                        <select class="form-control" id="codconsentimiento" name="consentimiento[cod_config_consentimiento]" style="width: 100%;" required>
+                                            <option></option>
+                                            {foreach from=$tipoconsentimiento item=itemtipoconsentimiento key=keytipoconsentimiento}
+                                            <option value="{$itemtipoconsentimiento.cod_config_consentimiento}">{$itemtipoconsentimiento.nom_config_consentimiento}</option>
+                                            {/foreach}
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4> huella Dactilar</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <fieldset class="form-group">
+                                        <label class="col-sm-12 control-label" for="cargarHuellas">
+                                            Huella Dactilar
+                                        </label>
+
+                                        <input type="file" id="cargarHuellas" class="form-control input-sm file" data-show-upload="false" data-show-preview="true" data-showCaption="false" data-allowed-file-extensions='["bmp"]' name="huellas" />
+                                    </fieldset>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="capturarHuella" onclick="Initialize()" disabled><i class="fa fa-hand-pointer-o"></i> Capturar Huella</button>
+                    <button type="submit" class="btn btn-primary" id="enviarIngreso"><i class="fa fa-floppy-o"></i> Crear y Generar Consentimiento</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modalPacientes" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title white" >Pacientes</h4>
+            </div>
+            <div class="modal-body">
+                <ul  class="nav nav-pills">
+                    <li class="active">
+                        <a href="#listadoPacientes" data-toggle="tab">LISTA DE PACIENTES</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="listadoPacientes">
+
+                        <hr>
+                        <table id="tablaPacientes" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="3%">Nombre</th>
+                                <th width="1%">Cedula</th>
+                                <th width="1%">Telefono</th>
+                                <th width="1%">Celular</th>
+                                <th width="2%">Direccion</th>
+                                <th width="2%">Registro</th>
+                                <th width="4%"></th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var _service    = '{$_service}';
+    var _metodo     = '{$_metodo}';
+    var _directorio = '{$configEndodoncia.ruta_huella_config}';
+</script>

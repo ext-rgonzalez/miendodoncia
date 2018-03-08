@@ -1,0 +1,93 @@
+<form id="formIngreso" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="text-right">
+            <button type="submit" id="guardarIngreso" class="btn btn-primary btn-sm btn-group"><i class="fa fa-floppy-o fa-right"></i> Guardar</button>
+            <button type="button" id="limpiarIngreso" class="btn btn-primary btn-sm btn-group"><i class="fa fa-trash-o fa-right"></i> Limpiar</button>
+        </div>
+    </section>
+
+    <section class="row">
+
+        <hr>
+
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4> Datos Basicos del Comprobante</h4>
+                </div>
+                <div class="panel-body">
+
+                    <fieldset class="form-group">
+                        <label class="col-sm-3 control-label" for="ingresosNumComprobante">
+                            Nro. Comprobante
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="gastos[gastos][num_sig_comp_ingreso]" id="ingresosNumComprobante" class="form-control" readonly>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label class="col-sm-3 control-label" for="ingresoObservacion">
+                            Observaciones
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea id="ingresoObservacion" name="gastos[gastos][obs_pago]" rows="2" class=" form-control" placeholder=" "></textarea>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label class="col-sm-3 control-label" for="ingresoNota">
+                            Notas
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea id="ingresoNota" name="gastos[gastos][not_pago]" rows="2" class=" form-control" placeholder=" "></textarea>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-warning" id="panelTratamientos">
+                <div class="panel-heading">
+                    <h4> Informacion sobre los Gastos</h4>
+                </div>
+                <div class="panel-body form-horizontal">
+                    <div class="row">
+                        <div class="col-sm-12" style="font-size:8pt;text-align:center;">
+                            <div class="col-lg-4" style="text-align:center;">Concepto o Descripcion del Gasto</div>
+                            <div class="col-lg-2" style="text-align:center;">Valor</div>
+                        </div>
+                    </div>
+
+                    <div id="div-clone" class="div-cloner">
+                        <div class="row">
+                            <div class="col-sm-12" style="font-size:8pt;text-align:center;">
+                                <div class="col-lg-10" style="text-align:center;">
+                                    <input type="text" class="form-control"  name="gastos[gastos][detalle][detalle][]" id="ingresosdiente">
+                                </div>
+                                <div class="col-lg-2" style="text-align:center;">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="gastos[gastos][detalle][recibido][]" id="ingresosrecibido" required>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" id="agregar-fila" type="button"><i class="fa fa-plus" ></i> </button>
+                                            <button class="btn btn-danger" style="display:none" id="eliminar-fila" type="button"><i class="fa fa-minus"></i> </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</form>
+
+<script>
+    var _service    = '{$_service}';
+    var _metodo     = '{$_metodo}';
+</script>

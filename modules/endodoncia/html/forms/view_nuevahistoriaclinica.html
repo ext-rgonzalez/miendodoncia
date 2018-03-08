@@ -1,0 +1,834 @@
+<form id="historiaClinica" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="text-right">
+            <a href="?app={'endodoncia'|base64_encode}&met={'HistoriaClinica'|base64_encode}&arg={'1,2,HistoriaClinica*2'|base64_encode}" id="regresarrHistoriaClinica" class="btn btn-default btn-sm btn-group"><i class="fa fa-arrow-left fa-right"></i> Listado Historias Clinicas</a>
+            <button type="submit" id="guardarHistoriaClinica" class="btn btn-primary btn-sm btn-group" {if $detalle}disabled{/if}><i class="fa fa-floppy-o fa-right"></i> Guardar</button>
+        </div>
+    </section>
+
+    <section class="row">
+
+        <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            {if isset($edit)}
+            <input type="hidden" name="historiaclinica[historiaclinica][cod_historia_clinica]" value="{$historia_clinica_edit.cod_historia_clinica}">
+            {/if}
+            <hr>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4> Informacion de la Historia Clinica</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="cod_paciente">
+                                    Seleccionadar Paciente
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nom_paciente" name="historiaclinica[paciente][nom_paciente]" value="{if isset($edit)}{$historia_clinica_edit.nom_paciente}{/if}" readonly>
+                                        <input type="hidden" class="form-control" id="cod_paciente" placeholder="Perfil" name="historiaclinica[paciente][cod_paciente]" value="{if isset($edit)}{$historia_clinica_edit.cod_paciente}{/if}" readonly>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" id="seleccionarPaciente" {if $detalle}disabled{/if}><i class="fa fa-search"></i> Buscar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="cod_config_dental">
+                                    Seleccionadar Diente
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nom_config_dental" name="historiaclinica[config_dental][nom_config_dental]" value="{if isset($edit)}{$historia_clinica_edit.nom_config_dental}{/if}" readonly>
+                                        <input type="hidden" class="form-control" id="cod_config_dental" placeholder="Perfil" name="historiaclinica[config_dental][cod_config_dental]" value="{if isset($edit)}{$historia_clinica_edit.cod_config_dental}{/if}" readonly>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" id="seleccionarDiente" {if !isset($edit) && !isset($historia_clinica_edit.cod_config_dental)}disabled{/if}><i class="fa fa-search"></i> Buscar</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="ind_desobturacion">
+                                    Habilitar Desobturacion?
+                                </label>
+                                <div class="col-sm-1">
+                                    <div class="onoffswitch pull-right">
+                                        <input type="checkbox" name="historiaclinica[historiaclinica][ind_desobturacion]" class="onoffswitch-checkbox" id="ind_desobturacion" {if isset($edit) && ($historia_clinica_edit.ind_desobturacion || $desobturacion.desobturacion)}checked{/if} {if $detalle}disabled{/if}>
+                                        <label class="onoffswitch-label" for="ind_desobturacion"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="ind_retratamiento">
+                                    Retratamiento?
+                                </label>
+                                <div class="col-sm-1">
+                                    <div class="onoffswitch pull-right">
+                                        <input type="checkbox" name="historiaclinica[historiaclinica][ind_retratamiento]" class="onoffswitch-checkbox" id="ind_retratamiento" {if isset($edit) && $historia_clinica_edit.ind_retratamiento}checked{/if} {if $detalle}disabled{/if}>
+                                        <label class="onoffswitch-label" for="ind_retratamiento"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="ind_desobturacion">
+                                    Temporales?
+                                </label>
+                                <div class="col-sm-1">
+                                    <div class="onoffswitch pull-right">
+                                        <input type="checkbox" name="historiaclinica[historiaclinica][ind_temporales]" class="onoffswitch-checkbox" id="ind_temporales" {if isset($edit) && $historia_clinica_edit.ind_temporales}checked{/if} disabled>
+                                        <label class="onoffswitch-label" for="ind_temporales"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="ind_desobturacion">
+                                    Control de Procedimiento
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="cod_config_control" name="historiaclinica[historiaclinica][cod_config_control]" {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_control item=itemconfig_control key=keyconfig_control}
+                                        <option value="{$itemconfig_control.cod_config_control}" {if isset($edit) && ($itemconfig_control.cod_config_control==$historia_clinica_edit.cod_config_control)}selected{/if}>{$itemconfig_control.nom_config_control}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="ind_desobturacion">
+                                    Costo del tratamiento
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="historiaclinica[historiaclinica][imp_total_historia_clinica]" value="{if isset($edit) && $historia_clinica_edit.imp_total_historia_clinica}{$historia_clinica_edit.imp_total_historia_clinica|string_format:'%d'}{/if}" id="imp_total_historia_clinica" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="ind_desobturacion">
+                                    Recordar proximo pago
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][fec_prox_pago]" value="{if isset($edit) && $historia_clinica_edit.fec_prox_pago}{$historia_clinica_edit.fec_prox_pago}{/if}" id="fec_prox_pago" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4> Anotaciones de la Historia Clinica</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="des_remision_historia_clinica">
+                                    Hora De Entrada
+                                </label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][hora_entrada]" id="hora_entrada" value="{$hora_entrada}" readonly>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="des_remision_historia_clinica">
+                                    Observacion Remision
+                                </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="historiaclinica[historiaclinica][des_remision_historia_clinica]" id="des_remision_historia_clinica" {if $detalle}disabled{/if}>{if isset($edit)}{$historia_clinica_edit.des_remision_historia_clinica}{/if}</textarea>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-3 control-label" for="motivo_historia_clinica">
+                                    Motivo de Consulta
+                                </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="historiaclinica[historiaclinica][motivo_historia_clinica]" id="motivo_historia_clinica" {if $detalle}disabled{/if}>{if isset($edit)}{$historia_clinica_edit.motivo_historia_clinica}{/if}</textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4> Anamnesis - Medicamentos y Examen Endodontico</h4>
+                        </div>
+                        <div class="panel-body">
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_ant_fam">
+                                    Antecedentes Familiares
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_ant_fam" name="historiaclinica[ant_familiares][cod_ant_fam][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_antecedentes item=itemconfig_antecedentes key=keyconfig_antecedentes}
+                                        <option value="{$itemconfig_antecedentes.cod_config_antecedentes}" {if isset($edit) && $itemconfig_antecedentes.cod_config_antecedentes|in_array:$historia_antecedentes_familiares_edit}selected{/if}>{$itemconfig_antecedentes.nom_config_antecedentes}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_ant_odo">
+                                    Antecedentes Odontologicos
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_ant_odo" name="historiaclinica[ant_odontologicos][cod_ant_odo][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_antecedentes_odontologicos item=itemconfig_antecedentes_odontologicos key=keyconfig_antecedentes_odontologicos}
+                                        <option value="{$itemconfig_antecedentes_odontologicos.cod_config_antecedentes}" {if isset($edit) && $itemconfig_antecedentes_odontologicos.cod_config_antecedentes|in_array:$historia_antecedentes_odontologicos_edit}selected{/if}>{$itemconfig_antecedentes_odontologicos.nom_config_antecedentes}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_ant_per">
+                                    Antecedentes Personales
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_ant_per" name="historiaclinica[ant_personales][cod_ant_per][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_antecedentes_personales item=itemconfig_antecedentes_personales key=keyconfig_antecedentes_personales}
+                                        <option value="{$itemconfig_antecedentes_personales.cod_config_antecedentes}" {if isset($edit) && $itemconfig_antecedentes_personales.cod_config_antecedentes|in_array:$historia_antecedentes_personales_edit}selected{/if}>{$itemconfig_antecedentes_personales.nom_config_antecedentes}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_med">
+                                    Medicamentos
+                                </label>
+
+                                <div class="col-sm-8">
+
+                                    <div class="input-group">
+                                        <select class="form-control" id="no_cod_med" name="historiaclinica[medicamentos][cod_med][]" multiple {if $detalle}disabled{/if}>
+                                            {foreach from=$historia_medicamentos_edit item=itemhistoria_medicamentos_edit key=keyhistoria_medicamentos_edit}
+                                            <option value="{$itemhistoria_medicamentos_edit.cod_config_medicamentos}" selected>{$itemhistoria_medicamentos_edit.nom_config_medicamentos}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" id="seleccionarMedicamentos" {if $detalle}disabled{/if}><i class="fa fa-plus"></i> Agregar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_ant_per">
+                                    Alergias
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_ale" name="historiaclinica[alergias][cod_ale][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_alergias item=itemconfig_alergias key=keyconfig_alergias}
+                                        <option value="{$itemconfig_alergias.cod_config_alergias}" {if isset($edit) && $itemconfig_alergias.cod_config_alergias|in_array:$historia_alergias_edit}selected{/if}>{$itemconfig_alergias.nom_config_alergias}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="que_historia_clinica">
+                                    Que ?
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][que_historia_clinica]" id="que_historia_clinica" value="{if isset($edit)}{$historia_clinica_edit.que_historia_clinica}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="como_historia_clinica">
+                                    Como ?
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][como_historia_clinica]" id="como_historia_clinica" value="{if isset($edit)}{$historia_clinica_edit.como_historia_clinica}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="cuando_historia_clinica">
+                                    Cuando ?
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][cuando_historia_clinica]" id="cuando_historia_clinica" value="{if isset($edit)}{$historia_clinica_edit.cuando_historia_clinica}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="donde_historia_clinica">
+                                    Donde ?
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][donde_historia_clinica]" id="donde_historia_clinica" value="{if isset($edit)}{$historia_clinica_edit.donde_historia_clinica}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="porque_historia_clinica">
+                                    Porque ?
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="historiaclinica[historiaclinica][porque_historia_clinica]" id="porque_historia_clinica" value="{if isset($edit)}{$historia_clinica_edit.porque_historia_clinica}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="cod_analisis_sensibilidad">
+                                    Prueba de Sensibilidad
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="cod_analisis_sensibilidad" name="historiaclinica[historiaclinica][cod_analisis_sensibilidad]" {if $detalle}disabled{/if}>
+                                        {foreach from=$prueba_sensibilidad item=itemprueba_sensibilidad key=keyprueba_sensibilidad}
+                                        <option value="{$itemprueba_sensibilidad.cod_respuestas}" {if isset($edit) && $itemprueba_sensibilidad.cod_respuestas==$historia_clinica_edit.cod_analisis_sensibilidad}selected{/if}>{$itemprueba_sensibilidad.nom_respuestas}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4> Informacion sobre Tejidos - Diagnostico y Analisis Radiografico</h4>
+                        </div>
+                        <div class="panel-body">
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_tej_bla">
+                                    Tejidos Blandos
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_tej_bla" name="historiaclinica[tej_blandos][cod_tej_bla][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_tejidos_blandos item=itemconfig_tejidos_blandos key=keyconfig_tejidos_blandos}
+                                        <option value="{$itemconfig_tejidos_blandos.cod_config_tejidos}" {if isset($edit) && $itemconfig_tejidos_blandos.cod_config_tejidos|in_array:$historia_tejidos_blando_edit}selected{/if}>{$itemconfig_tejidos_blandos.nom_config_tejidos}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-8 col-lg-offset-4" {if !isset($edit)}style="display: none;"{elseif !isset($historia_clinica_edit.otro_tejidos_blandos) && $historia_clinica_edit.otro_tejidos_blandos==''}style="display: none;"{/if}>
+                                    <input type="text" class="form-control" id="otro_no_cod_tej_bla" name="historiaclinica[tej_blandos][otro_cod_tej_bla]" value="{if isset($edit)}{$historia_clinica_edit.otro_tejidos_blandos}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_tej_den">
+                                    Tejidos Dentales
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_tej_den" name="historiaclinica[tej_dentales][cod_tej_den][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_tejidos_dentales item=itemconfig_tejidos_dentales key=keyconfig_tejidos_dentales}
+                                        <option value="{$itemconfig_tejidos_dentales.cod_config_tejidos}" {if isset($edit) && $itemconfig_tejidos_dentales.cod_config_tejidos|in_array:$historia_tejidos_dental_edit}selected{/if}>{$itemconfig_tejidos_dentales.nom_config_tejidos}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-8 col-lg-offset-4" {if !isset($edit)}style="display: none;"{elseif !isset($historia_clinica_edit.otro_tejidos_dentales) && $historia_clinica_edit.otro_tejidos_dentales==""}style="display: none;"{/if}>
+                                    <input type="text" class="form-control" id="otro_no_cod_tej_den" name="historiaclinica[tej_dentales][otro_cod_tej_den]" value="{if isset($edit)}{$historia_clinica_edit.otro_tejidos_dentales}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_tej_per">
+                                    Tejidos Periodontales
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_tej_per" name="historiaclinica[tej_periodontales][cod_tej_per][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_tejidos_periodontales item=itemconfig_tejidos_periodontales key=keyconfig_tejidos_periodontales}
+                                        <option value="{$itemconfig_tejidos_periodontales.cod_config_tejidos}" {if isset($edit) && $itemconfig_tejidos_periodontales.cod_config_tejidos|in_array:$historia_tejidos_pariodontal_edit}selected{/if}>{$itemconfig_tejidos_periodontales.nom_config_tejidos}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-8 col-lg-offset-4" {if !isset($edit)}style="display: none;"{elseif !isset($historia_clinica_edit.otro_tejidos_periodontales) && $historia_clinica_edit.otro_tejidos_periodontales==""}style="display: none;"{/if}>
+                                    <input type="text" class="form-control" id="otro_no_cod_tej_per" name="historiaclinica[tej_periodontales][otro_cod_tej_per]" value="{if isset($edit)}{$historia_clinica_edit.otro_tejidos_periodontales}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_tej_per">
+                                    Tejidos Perirradiculares
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_tej_peri" name="historiaclinica[tej_perirradiculares][cod_tej_peri][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_tejidos_perirradiculares item=itemconfig_tejidos_perirradiculares key=keyconfig_tejidos_perirradiculares}
+                                        <option value="{$itemconfig_tejidos_perirradiculares.cod_config_tejidos}" {if isset($edit) && $itemconfig_tejidos_perirradiculares.cod_config_tejidos|in_array:$historia_tejidos_perirradicular_edit}selected{/if}>{$itemconfig_tejidos_perirradiculares.nom_config_tejidos}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-8 col-lg-offset-4" {if !isset($edit)}style="display: none;"{elseif !isset($historia_clinica_edit.otro_tejidos_perirradiculares) && $historia_clinica_edit.otro_tejidos_perirradiculares==""}style="display: none;"{/if}>
+                                    <input type="text" class="form-control" id="otro_no_cod_tej_peri" name="historiaclinica[tej_perirradiculares][otro_cod_tej_peri]" value="{if isset($edit)}{$historia_clinica_edit.otro_tejidos_perirradiculares}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_tej_pul">
+                                    Tejidos Pulpares
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_tej_pul" name="historiaclinica[tej_pulpares][cod_tej_pul][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_tejidos_pulpares item=itemconfig_tejidos_pulpares key=keyconfig_tejidos_pulpares}
+                                        <option value="{$itemconfig_tejidos_pulpares.cod_config_tejidos}" {if isset($edit) && $itemconfig_tejidos_pulpares.cod_config_tejidos|in_array:$historia_tejidos_pulpar_edit}selected{/if}>{$itemconfig_tejidos_pulpares.nom_config_tejidos}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-8 col-lg-offset-4" {if !isset($edit)}style="display: none;"{elseif !isset($historia_clinica_edit.otro_tejidos_pulpares) && $historia_clinica_edit.otro_tejidos_pulpares==""}style="display: none;"{/if}>
+                                    <input type="text" class="form-control" id="otro_no_cod_tej_pul" name="historiaclinica[tej_pulpares][otro_cod_tej_pul]" value="{if isset($edit)}{$historia_clinica_edit.otro_tejidos_pulpares}{/if}" {if $detalle}disabled{/if}>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_diagnostico">
+                                    Diagnostico
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_diagnostico" name="historiaclinica[diagnostico][cod_diagnostico]" {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_diagnosticos item=itemconfig_diagnosticos key=keyconfig_diagnosticos}
+                                        <option value="{$itemconfig_diagnosticos.nom_config_diagnosticos}" {if isset($edit) && $itemconfig_diagnosticos.nom_config_diagnosticos==$historia_diagnotico_edit.nom_config_diagnosticos}selected{/if}>{$itemconfig_diagnosticos.nom_config_diagnosticos}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_subdiagnostico">
+                                    Sub Diagnostico
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_subdiagnostico" name="historiaclinica[diagnostico][cod_subdiagnostico]" {if $detalle}disabled{/if}>
+                                        {if isset($edit)}
+                                        <option value="{$historia_diagnotico_edit.cod_config_diagnosticos}" selected>{$historia_diagnotico_edit.des_config_diagnosticos}</option>
+                                        {/if}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="no_cod_anarad">
+                                    Analisis radiografico
+                                </label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="no_cod_anarad" name="historiaclinica[ana_radiografico][cod_anarad][]" multiple {if $detalle}disabled{/if}>
+                                        <option></option>
+                                        {foreach from=$config_analisis item=itemconfig_analisis key=keyconfig_analisis}
+                                        <option value="{$itemconfig_analisis.cod_config_analisis_radiografico}" {if isset($edit) && $itemconfig_analisis.cod_config_analisis_radiografico|in_array:$historia_analisis_radiografico_edit}selected{/if}>{$itemconfig_analisis.nom_config_analisis_radiografico}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label class="col-sm-4 control-label" for="des_anarad_historia_clinica">
+                                    Descripcion Analisis Radiografico
+                                </label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="historiaclinica[ana_radiografico][des_anarad_historia_clinica]" id="des_anarad_historia_clinica" {if $detalle}disabled{/if}>{if isset($edit)}{$historia_clinica_edit.des_anarad_historia_clinica}{/if}</textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4> Evoluciones</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="historialEvolucion" {if !isset($edit)}style="display: none;"{/if}>
+                                <textarea id="no_ult_evoluciones" rows="11" class="form-control" placeholder=" " readonly="" {if $detalle}disabled{/if}>{$evoluciones.evoluciones}</textarea>
+                            </div>
+
+                            <div id="nuevaEvolucion" style="display: none;">
+                                <hr>
+                                <textarea id="nueva_evolucion" name="historiaclinica[evolucion][nuevaEvolucion]" rows="4" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-xs btn-success right" id="agregarEvolucion" {if $detalle}disabled{/if}><i class="fa fa-plus"></i> AGREGAR EVOLUCION</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9" id="infoConductos">
+                {if isset($edit)}
+                    {$diagnostico.panel}
+                {else}
+                    <div class="alert-info"><i class="fa fa-exclamation-triangle fa-4x"></i> Informacion sobre conductos</div>
+                {/if}
+                </div>
+                <div class="col-lg-3" id="infoDesobturacion">
+                {if isset($edit) && $desobturacion.desobturacion}
+                    {$desobturacion.desobturacion}
+                {else}
+                    <div class="alert-info"><i class="fa fa-exclamation-triangle fa-4x"></i> Desobturacion</div>
+                {/if}
+                </div>
+            </div>
+
+            {if isset($edit)}
+            <div id="registroRadiograficoBD">
+            {$imagenes.imagenes}
+            </div>
+            {else}
+            <div class="row" style="display: none;">
+                <div class="col-lg-12" id="registroRadiografico">
+                </div>
+            </div>
+            {/if}
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4> Adjuntar imagenes Radiograficas / Fotograficas</h4>
+                        </div>
+                        <div class="panel-body">
+                            <label for="cargaractualizargrupo_archivo">Seleccionar los archivos adjuntos a esta historia clinica</label>
+                            <input type="file" id="cargarImagenesHistoriaClinica" multiple class="form-control input-sm file" data-show-upload="false" data-show-preview="true" data-allowed-file-extensions='["jpg","png"]' name="historiaclinica[]" placeholder="" {if $detalle}disabled{/if}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+</form>
+
+<div id="modalPacientes" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title white" >Pacientes</h4>
+            </div>
+            <div class="modal-body">
+                <ul  class="nav nav-pills">
+                    <li class="active">
+                        <a href="#listadoPacientes" data-toggle="tab">LISTA DE PACIENTES</a>
+                    </li>
+                    <li>
+                        <a href="#nuevoPacientes" data-toggle="tab"><i class="fa fa-plus-circle"></i> CREAR NUEVO</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="listadoPacientes">
+
+                        <hr>
+                        <table id="tablaPacientes" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="3%">Nombre</th>
+                                <th width="1%">Cedula</th>
+                                <th width="1%">Telefono</th>
+                                <th width="1%">Celular</th>
+                                <th width="2%">Direccion</th>
+                                <th width="2%">Registro</th>
+                                <th width="4%"></th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane" id="nuevoPacientes">
+                        <hr>
+                        <form id="nuevoPaciente" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="paciente[cod_paciente]">
+
+                            <div class="row">
+                                <div class="col-lg-12 text-right">
+                                    <button type="button" id="limpiarPaciente" class="btn btn-primary btn-sm btn-group"><i class="fa fa-trash-o fa-right"></i> Limpiar y crear nuevo</button>
+                                    <button type="submit" id="guardarPaciente" class="btn btn-primary btn-sm btn-group"><i class="fa fa-floppy-o fa-right"></i> Guardar y Seleccionar</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="ced_paciente">Cedula Nro.</label>
+                                    <input type="text" id="ced_paciente" name="paciente[ced_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="nom1_paciente">Nombres</label>
+                                    <input type="text" id="nom1_paciente" name="paciente[nom1_paciente]"  class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="ape1_paciente">Apellidos</label>
+                                    <input type="text" id="ape1_paciente" name="paciente[ape1_paciente]"  class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="fec_nacimiento_paciente">Fecha de Nacimiento</label>
+                                    <input type="text" id="fec_nacimiento_paciente" name="paciente[fec_nacimiento_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="dir_paciente">Direccion</label>
+                                    <input type="text" id="dir_paciente" name="paciente[dir_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="tel_paciente">Telefono</label>
+                                    <input type="text" id="tel_paciente" name="paciente[tel_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="cel_paciente">Celular</label>
+                                    <input type="text" id="cel_paciente" name="paciente[cel_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="email_paciente">Email</label>
+                                    <input type="email" id="email_paciente" name="paciente[email_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="cod_ciudad">Ciudad</label>
+                                    <select class="form-control" id="cod_ciudad" name="paciente[cod_ciudad]" style="width: 100%" required></select>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="cod_genero">Genero</label>
+                                    <select id="cod_genero" name="paciente[cod_genero]" class="form-control">
+                                        {foreach from=$config_genero item=itemconfig_genero key=keyconfig_genero}
+                                        <option value="{$itemconfig_genero.cod_genero}">{$itemconfig_genero.nom_genero}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="profesion_paciente">Profesion</label>
+                                    <input type="text" id="profesion_paciente" name="paciente[profesion_paciente]" class="form-control" required>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label class="control-label" for="cod_config_dental">
+                                        Paciente Embarazada
+                                    </label>
+                                    <div class="onoffswitch pull-right">
+                                        <input type="checkbox" name="paciente[ind_embarazada]" class="onoffswitch-checkbox" id="ind_embarazada">
+                                        <label class="onoffswitch-label" for="ind_embarazada"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalOdontograma" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title white" >Odontograma</h4>
+            </div>
+            <div class="modal-body">
+                <ul  class="nav nav-pills">
+                    <li class="active">
+                        <a href="#adultos" data-toggle="tab">ODONTOGRAMA</a>
+                    </li>
+                    <li>
+                        <a href="#ninos" data-toggle="tab">TEMPORALES</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="adultos">
+                        {include file=$odontogramaAdultos}
+                    </div>
+                    <div class="tab-pane" id="ninos">
+                        {include file=$odontogramaNinos}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalMedicamentos" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title white" >Crear Medicamentos</h4>
+            </div>
+            <div class="modal-body">
+                <ul  class="nav nav-pills">
+                    <li class="active">
+                        <a href="#nuevoMedicamento" data-toggle="tab">CREAR NUEVO</a>
+                    </li>
+                    <li>
+                        <a href="#nuevoMedicamentoCsv" data-toggle="tab"><i class="fa fa-plus-circle"></i> CARGAR ARCHIVO CSV</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="nuevoMedicamento">
+                        <hr>
+                        <form id="crearMedicamento" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="paciente[cod_paciente]">
+
+                            <div class="row">
+                                <div class="col-lg-12 text-right">
+                                    <button type="submit" id="guardarMedicamento" class="btn btn-primary btn-sm btn-group"><i class="fa fa-floppy-o fa-right"></i> Guardar y Seleccionar</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="cod_unico_config_medicamentos">Codigo Unico</label>
+                                    <input type="text" id="cod_unico_config_medicamentos" name="medicamento[cod_unico_config_medicamentos]" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="nom_config_medicamentos">Nombre Medicamento</label>
+                                    <input type="text" id="nom_config_medicamentos" name="medicamento[nom_config_medicamentos]"  class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="des_config_medicamentos">Descripcion</label>
+                                    <input type="text" id="des_config_medicamentos" name="medicamento[des_config_medicamentos]"  class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="forma_farma_config_medicamentos">Forma Farmaceutica</label>
+                                    <input type="text" id="forma_farma_config_medicamentos" name="medicamento[forma_farma_config_medicamentos]" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="tab-pane" id="nuevoMedicamentoCsv">
+                        <hr>
+                        <form id="crearMedicamentoCsv" method="post" enctype="multipart/form-data">
+
+                            <div class="row">
+                                <div class="col-lg-12 text-right">
+                                    <a href="?app={'endodoncia'|base64_encode}&met={'ExportArchivo'|base64_encode}&arg={'formatoMedicamentos'|base64_encode}" id="descargarFormatoMedicamentoCsv" class="btn btn-default btn-sm btn-group"><i class="fa fa-download fa-right"></i> Descargar Formato</a>
+                                    <button type="submit" id="cargarMedicamentoCsv" class="btn btn-default btn-sm btn-group"><i class="fa fa-upload fa-right"></i> Cargar Archivo</button>
+                                    <button type="submit" id="guardarMedicamentoCsv" class="btn btn-primary btn-sm btn-group" disabled><i class="fa fa-floppy-o fa-right"></i> Guardar</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="cargaractualizargrupo_archivo">Seleccionar el Archivo (csv)</label>
+                                    <input type="file" id="cargaractualizargrupo_archivo" class="form-control input-sm file" data-show-upload="false" data-show-preview="false" data-allowed-file-extensions='["csv"]' name="cargarcsvmedicamentos[lista]" placeholder="">
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <hr>
+                                <table id="tablaMedicamentos" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th width="3%">Codigo Unico</th>
+                                        <th width="5%">Nombre Medicamento</th>
+                                        <th width="5%">Descripcion</th>
+                                        <th width="5%">Forma</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="accionesPosteriores" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title white" >Proxima Accion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info">A continuacion usted puede seleccionar la proxima accion que desea hacer, la accion aplica al paciente y la historia clinica guardada anteriormente, para no hacer nada, por favor cierre la ventana.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-11 col-lg-offset-1 text-center">
+                        <div class="btn-group btn-group text-center" role="group">
+                            <button type="button" id="agregarIngresos" class="btn btn-primary"><i class="fa fa-money"></i> Agregar Ingreso</button>
+                            <button type="button" id="enviarOdontologo" class="btn btn-primary"><i class="fa fa-send"></i> Enviar Historia Clinica a Odontologo</button>
+                            <button type="button" id="enviarPaciente" class="btn btn-primary"><i class="fa fa-send"></i> Enviar Historia Clinica a Paciente</button>
+                            <button type="button" id="cerraryenviar" class="btn btn-primary"><i class="fa fa-power-off"></i> Cerrar y Enviar remision</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var _service    = '{$_service}';
+    var _metodo     = '{$_metodo}';
+    var _codImagen  = '{if isset($historia_clinica_edit.cod_config_dental)}{$historia_clinica_edit.cod_config_dental}{else}0{/if}';
+</script>
