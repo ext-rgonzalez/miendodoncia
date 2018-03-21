@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="es" class="bootstrap-layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{$_titulo}</title>
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+    <link type="text/css" href="modules/sistema/html/css/style.min.css" rel="stylesheet">
+    <link type="text/css" href="modules/sistema/html/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="modules/sistema/html/css/plugins/sweetalert/sweetalert.min.css" rel="stylesheet">
+    <link type="text/css" href="modules/sistema/html/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" href="modules/sistema/html/css/ganafacil.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prompt|Raleway" rel="stylesheet">
+    {$_cssDe}
+    {if $_cssTemplate}
+    <link type="text/css" href="{$_cssTemplate}" rel="stylesheet">
+    {/if}
+    {literal}<style>li.nav-item:hover, li.nav-item:active, li.nav-link:hover, li.nav-item:active{color: #000000;}
+.navbar-dark:hover .navbar-nav:hover .nav-link:hover {background-color: transparent;}</style>{/literal}
+</head>
+
+<body class="layout-container ls-top-navbar si-l3-md-up">
+
+<nav class="navbar navbar-dark navbar-full navbar-fixed-top nav-ganafacil" style="z-index:10">
+
+    <button class="navbar-toggler pull-xs-left" type="button" data-toggle="sidebar" data-target="#sidebarLeft"><span class="material-icons">menu</span></button>
+    <a href="index.php" class="navbar-brand" style="padding: 5px 15px"><img src="modules/sistema/adjuntos/Logotipo-MiEndodoncia1.png" width="150"></a>
+
+    <!-- Search -->
+    <form class="form-inline pull-xs-left hidden-sm-down" action="?app=ZW5kb2RvbmNpYQ==&met=SGlzdG9yaWFDbGluaWNh&arg=MSwyLEhpc3RvcmlhQ2xpbmljYSoy" method="post">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control input-ganafacil" placeholder="Buscar...">
+            <span class="input-group-btn ">
+                <button class="btn" type="submit"><i class="material-icons">search</i>
+                </button>
+            </span>
+        </div>
+    </form>
+    <!-- // END Search -->
+
+    <ul class="nav navbar-nav hidden-sm-down">
+
+        <li class="nav-item" style="top:17px">
+            <a class="nav-link" href="?app=c2lzdGVtYQ==&met=Y2VycmFy"><i class="fa fa-sign-out"></i> Cerrar Sesion</a>
+        </li>
+        <li class="nav-item" style="top:17px">
+            <a class="nav-link" id="panelnotificacion"><i class="fa fa-bell-o"></i> <span class="badge label-danger" style="position:absolute;top:-10px;left: 22px">{if $infoUsuario["infoNumNotificaciones"]>0}{$infoUsuario["infoNumNotificaciones"]}{/if}</span></a>
+        </li>
+
+    </ul>
+
+    <!-- Menu -->
+
+</nav>
+<!-- // END Navbar -->
+<!-- Sidebar -->
+<div class="sidebar sidebar-left sidebar-light sidebar-visible-md-up si-si-2 ls-top-navbar-xs-up sidebar-transparent-md" style="z-index:20" id="sidebarLeft" data-scrollable>
+    <ul class="sidebar-menu">
+        {foreach from=$infoUsuario["infoMenuHeader"] key=keyMenuHeader item=valMenuHeader}
+        {$valMenuHeader}
+        {/foreach}
+    </ul>
+
+</div>
+<!-- // END Sidebar -->
+
+<!-- Content -->
+<div class="layout-content" data-scrollable>
+    <div class="" style="width: 98%;z-index:-1;">
+
+        <ol class="breadcrumb">
+            <li><a href="index.php">Inicio</a></li>
+            <li class="active">{$_subtitulo}</li>
+        </ol>
+        {include file= $_vista}
+    </div>
+
+    <footer class="footer">
+        <div class="">
+            <p class="text-muted">Miendodoncia :: software administrativo - plataforma web.</p>
+        </div>
+    </footer>
+</div>
+
+<div id="modalNotificaciones" class="modal fade notificacionesModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close", data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title" >Notificaciones</h4>
+            </div>
+            <div class="modal-body" style="height: 350px;overflow-y: auto;">
+                {foreach from=$infoUsuario["infoNotificaciones"] item="notificacion" key="key"}
+                <div class="alert alert-{if !$notificacion.ind_enpanel}info{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-codNotify="{$notificacion.cod_notificacion}" id="borrarNotificacion" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {$notificacion.des_notificacion}
+                    <p><strong style="font-size: 9px">{$notificacion.fecha_notificacion}</strong></p></p>
+                </div>
+                {/foreach}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-sm" id="borrarNotificaciones"><i class="fa fa-trash"></i> Borrar Todo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/tether.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/bootstrap.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/adminplus.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/main.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/generalfunction.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/plugins/jquery-validate/jquery.validate.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="modules/sistema/html/js/plugins/notify/bootstrap-notify.min.js"></script>
+{$_jsDe}
+{foreach from=$_includeJs key=keyJs item=js}
+<script language="JavaScript" type="text/javascript" src="{$js}"></script>
+{/foreach}
+<script language="JavaScript" type="text/javascript" src="{$_jsTemplate}"></script>
+</html>

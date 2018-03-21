@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login/Signup</title>
+
+  <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+  <meta name="robots" content="noindex">
+
+  <!-- Material Design Icons  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Roboto Web Font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+
+  <!-- App CSS -->
+  <link type="text/css" href="css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body class="login">
+
+  <div class="row">
+    <div class="col-sm-8 col-sm-push-1 col-md-4 col-md-push-3 col-lg-4 col-lg-push-4">
+      <div class="center m-a-2">
+        <div class="icon-block img-circle">
+          <i class="material-icons md-48 text-muted">school</i>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header bg-white center">
+          <h4 class="card-title">Registro de Cuenta</h4>
+          <p class="card-subtitle">Sined</p>
+        </div>
+        <div class="p-a-2">
+          <form name="registrarCuenta" action="index.html" method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control span3 " placeholder="Nombre Completo" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Correo Electronico" required>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Contrase&ntilde;a">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Confirmar Contrase&ntilde;a">
+            </div>
+            <div class="form-group center">
+              <label class="c-input c-checkbox">
+                <input type="checkbox" checked required>
+                <span class="c-indicator"></span>Acepto <a href="#">los terminos de uso</a>
+              </label>
+            </div>
+            <p class="center">
+              <button type="submit" class="btn btn-primary btn-rounded btn-block">Registrase</button>
+            </p>
+            <div class="center">Ya esta registrado? <a href="login.html">Iniciar Sesion</a></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="js/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="js/tether.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- AdminPlus -->
+  <script src="js/adminplus.js"></script>
+
+  <!-- App JS -->
+  <script src="js/main.min.js"></script>
+    <!-- Validatr JS -->
+    <script src="js/plugins/validatr/validatr.min.js"></script>
+    
+    <!-- scripts JS -->
+    <script type="text/javascript">
+    $( document ).ready( function(){
+        $('#registrarCuenta').validatr(); 
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html class="bootstrap-layout">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Notifications</title>
+
+  <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+  <meta name="robots" content="noindex">
+
+  <!-- Material Design Icons  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Roboto Web Font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+
+  <!-- App CSS -->
+  <link type="text/css" href="css/style.min.css" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="css/plugins/sweetalert/sweetalert.min.css">
+
+</head>
+
+<body class="layout-container ls-top-navbar si-l3-md-up">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark bg-primary navbar-full navbar-fixed-top">
+
+    <!-- Toggle sidebar -->
+    <button class="navbar-toggler pull-xs-left" type="button" data-toggle="sidebar" data-target="#sidebarLeft"><span class="material-icons">menu</span></button>
+
+    <!-- Brand -->
+    <a href="index.html" class="navbar-brand"><i class="material-icons">school</i> LearnPlus</a>
+
+    <!-- Search -->
+    <form class="form-inline pull-xs-left hidden-sm-down">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search">
+        <span class="input-group-btn"><button class="btn" type="button"><i class="material-icons">search</i></button></span>
+      </div>
+    </form>
+    <!-- // END Search -->
+
+    <ul class="nav navbar-nav hidden-sm-down">
+
+      <!-- Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="forum.html">Forum</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="get-help.html">Get Help</a>
+      </li>
+    </ul>
+
+    <!-- Menu -->
+    <ul class="nav navbar-nav pull-xs-right">
+
+      <li class="nav-item">
+        <a href="cart.html" class="nav-link">
+          <i class="material-icons">shopping_cart</i>
+        </a>
+      </li>
+
+      <!-- User dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link active dropdown-toggle p-a-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false">
+          <img src="assets/images/people/50/guy-6.jpg" alt="Avatar" class="img-circle" width="40">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-list" aria-labelledby="Preview">
+          <a class="dropdown-item" href="account-edit.html"><i class="material-icons md-18">lock</i> <span class="icon-text">Edit Account</span></a>
+          <a class="dropdown-item" href="profile.html"><i class="material-icons md-18">person</i> <span class="icon-text">Public Profile</span></a>
+          <a class="dropdown-item" href="login.html">Logout</a>
+        </div>
+      </li>
+      <!-- // END User dropdown -->
+
+    </ul>
+    <!-- // END Menu -->
+
+  </nav>
+  <!-- // END Navbar -->
+  <!-- Sidebar -->
+  <div class="sidebar sidebar-left si-si-3 sidebar-visible-md-up sidebar-light ls-top-navbar-xs-up sidebar-transparent-md" id="sidebarLeft" data-scrollable>
+    <div class="sidebar-heading">DASHBOARDS</div>
+    <ul class="sidebar-menu">
+      <li class="sidebar-menu-item">
+        <a class="sidebar-menu-button" href="index.html">
+          <i class="sidebar-menu-icon material-icons">account_box</i> Student
+        </a>
+      </li>
+      <li class="sidebar-menu-item">
+        <a class="sidebar-menu-button" href="instructor-dashboard.html">
+          <i class="sidebar-menu-icon material-icons">school</i> Instructor
+        </a>
+      </li>
+    </ul>
+    <!-- Components menu -->
+    <div class="sidebar-heading">UI Components</div>
+    <ul class="sidebar-menu">
+      <li class="sidebar-menu-item open">
+        <a class="sidebar-menu-button" href="#">
+          <i class="sidebar-menu-icon material-icons">tune</i> UI Components
+        </a>
+        <ul class="sidebar-submenu sm-condensed">
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-buttons.html">Buttons</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-cards.html">Cards</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-tabs.html">Tabs</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-tree.html">Tree</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-nestable.html">Nestable</a>
+          </li>
+          <li class="sidebar-menu-item active">
+            <a class="sidebar-menu-button" href="ui-notifications.html">Notifications</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-progress.html">Progress Bars</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-forms.html">Forms</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-tables.html">Tables</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-charts.html">Charts</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-calendar.html">Calendar</a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a class="sidebar-menu-button" href="ui-maps-vector.html">Maps Vector</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!-- // END Components Menu -->
+  </div>
+  <!-- // END Sidebar -->
+
+  <!-- Content -->
+  <div class="layout-content" data-scrollable>
+    <div class="container-fluid">
+
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Notifications</li>
+      </ol>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Labels</h4>
+        </div>
+        <div class="card-block">
+          <span class="label label-default">Default</span>
+          <span class="label label-primary">Primary</span>
+          <span class="label label-success">Success</span>
+          <span class="label label-info">Info</span>
+          <span class="label label-warning">Warning</span>
+          <span class="label label-danger">Danger</span>
+          <hr>
+          <span class="label label-pill label-default">Default</span>
+          <span class="label label-pill label-primary">Primary</span>
+          <span class="label label-pill label-success">Success</span>
+          <span class="label label-pill label-info">Info</span>
+          <span class="label label-pill label-warning">Warning</span>
+          <span class="label label-pill label-danger">Danger</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Alerts</h4>
+        </div>
+        <div class="card-block">
+          <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> You successfully read this important alert message.
+          </div>
+          <div class="alert alert-info" role="alert">
+            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+          </div>
+          <div class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+          </div>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+          </div>
+          <hr>
+          <div class="alert alert-warning alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+          </div>
+        </div>
+      </div>
+
+      <div class="jumbotron">
+        <p class="lead">SweetAlert automatically centers itself on the page and looks great no matter if you're using a desktop computer, mobile or tablet. It's even highly customizeable, as you can see below!</p>
+      </div>
+
+      <div class="card-group">
+        <div class="card">
+          <div class="card-block">
+            <p>A basic message</p>
+            <button class="btn btn-primary try-sweet-simpleMessage">Try Alert!</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-block">
+            <p>A title with a text under</p>
+            <button class="btn btn-primary try-sweet-simpleTitle">Try Alert!</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-block">
+            <p>A success message!</p>
+            <button class="btn btn-success try-sweet-successMessage">Try Alert!</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-group">
+        <div class="card">
+          <div class="card-block">
+            <p>A warning message, with a function attached to the "Confirm"-button...</p>
+            <button class="btn btn-warning try-sweet-warningConfirm">Try Alert!</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-block">
+            <p>... and by passing a parameter, you can execute something else for "Cancel".</p>
+            <button class="btn btn-danger try-sweet-warningCallback">Try Alert!</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-block">
+            <p>An html message</p>
+            <button class="btn btn-primary try-sweet-htmlMessage">Try Alert!</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="jumbotron">
+        <h2>Bootstrap Modal</h2>
+        <p class="lead">Toggle a modal via JavaScript by clicking the button below. It will slide down and fade in from the top of the page.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-block">
+          Trigger Modal with :
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Button
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="js/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="js/tether.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- AdminPlus -->
+  <script src="js/adminplus.js"></script>
+
+  <!-- App JS -->
+  <script src="js/main.min.js"></script>
+
+  <!-- Vendor JS -->
+  <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+  <!-- Initialize -->
+  <script src="js/plugins/sweetalert/sweetalert.js"></script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

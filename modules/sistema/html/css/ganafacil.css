@@ -1,0 +1,168 @@
+body {font-family: 'Raleway', sans-serif}
+
+.popover-footer {
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    border-radius: 5px 5px 0 0;
+}
+
+.input-ganafacil{
+    border:0;
+    background-color: inherit;
+    border-bottom: 1.5px solid #00D4D1;
+    border-radius: inherit;
+
+}
+
+.label-ganafacil{
+    font-size: 9px;
+    color: #626262;
+    text-transform: uppercase;
+
+}
+
+.btn-ganafacil{
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    font-size: 10px;
+    color: #626262;
+    text-transform: uppercase;
+    border:1px solid #00D4D1;
+    background: inherit;
+    color: #00D4D1;
+    border-radius:  15px;
+}
+
+.btn-ganafacil:hover{
+    font-size: 10px;
+    color: #626262;
+    text-transform: uppercase;
+    border:1px solid #00D4D1;
+    background: inherit;
+    color: #00D4D1;
+    border-radius:  15px;
+}
+
+.btn-ganafacil:link{
+    font-size: 10px;
+    color: #626262;
+    text-transform: uppercase;
+    border:1px solid #00D4D1;
+    background: inherit;
+    color: #00D4D1;
+    border-radius:  15px;
+}
+
+.a-ganafacil{
+    color: #BCBCBC;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-style: inherit;
+
+
+
+}
+
+.a-ganafacil a:hover{
+    color: #BCBCBC;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-style: inherit;
+    text-decoration: none;
+
+}
+
+.a-ganafacil a:active{
+    color: #BCBCBC;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-style: inherit;
+    text-decoration: none;
+
+}
+
+.nav-ganafacil{
+    background: #00A8D4; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#00A8D4, #00D4D1); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#00A8D4, #00D4D1); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#00A8D4, #00D4D1); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#00A8D4, #00D4D1); /* Standard syntax (must be last) */
+}
+
+
+.dashboard-stat.blue-strong {
+    background-color: #4584d1;
+}
+
+.dashboard-stat.orange {
+    background-color: #f2a057;
+}
+
+.dashboard-stat.blue {
+    background-color: #27a9e3;
+}
+
+.dashboard-stat.green {
+    background-color: #18a689;
+}
+
+.dashboard-stat.gray {
+    background-color: #646464;
+}
+
+.dashboard-stat {
+    margin-bottom: 17px;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, .05);
+}
+
+.dashboard-stat .visual {
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.dashboard-stat .visual {
+    width: 70px;
+    height: 90px;
+    display: block;
+    float: right;
+    padding-top: 10px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.dashboard-stat .visual i {
+    color: #fff;
+    opacity: .4;
+    margin-left: -40px;
+    font-size: 115px;
+    top: 15px;
+    line-height: 75px;
+}
+
+.dashboard-stat .details {
+    position: absolute;
+    padding-left: 20px;
+}
+
+.dashboard-stat .details .number {
+    padding-top: 15px;
+    text-align: left;
+    font-size: 20px;
+    line-height: 21px;
+    margin-bottom: 5px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.dashboard-stat .details .desc {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0;
+    font-weight: normal;
+    color: #fff;
+}
